@@ -1,0 +1,37 @@
+{
+  "name": "streetfood-finder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "firebase": "^3.2.1",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-fileupload": "^2.2.0",
+    "react-router": "^2.0.0-rc5",
+    "reactfire": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.6.5",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "classnames": "^2.2.5",
+    "compass-mixins": "^0.12.10",
+    "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.9.0",
+    "node-sass": "^3.8.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "susy": "^2.2.12",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "scripts": {
+    "production": "webpack -p && firebase deploy",
+    "start": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "ISC"
+}

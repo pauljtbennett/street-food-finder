@@ -1,0 +1,53 @@
+.landing {
+    text-align: center;
+
+    .hero-wrapper {
+        position: relative;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.25);
+        color: #fff;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.75);
+        text-align: center;
+
+        .strapline {
+            display: block;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: $large-margin 0;
+            font-size: 1.6em;
+        }
+
+        .login {
+            color: #ddd;
+        }
+
+        p, a {
+            color: #fff;
+        }
+
+        button {
+            margin-bottom: $large-margin;
+            font-size: 1.6em;
+        }
+    }
+}
+
+hr {
+    border: none;
+	height: 1px;
+	width: 100%;
+	background: $line-color;
+	margin: $standard-margin 0;
+}

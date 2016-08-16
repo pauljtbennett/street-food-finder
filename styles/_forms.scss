@@ -1,0 +1,74 @@
+form {
+    label {
+        display: block;
+        margin: $small-margin 0;
+    }
+    
+	input,
+	textarea {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: $standard-margin;
+		padding: $standard-margin;
+		background: #fcfcfc;
+		border: 1px solid $line-color;
+		font-family: $body-font;
+        border-radius: 3px;
+
+        &.top {
+            margin-bottom: 0;
+            border-bottom: none;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &.mid {
+            margin-bottom: 0;
+            border-bottom: none;
+            border-radius: 0;
+        }
+
+        &.bottom {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+	}
+
+    textarea {
+        min-height: 100px;
+    }
+
+	input[type="submit"],
+    button[type="submit"],
+    label.file-upload {
+        display: block;
+        width: 100px;
+		margin: 0px auto;
+		padding: $standard-margin;
+        background: $success-color;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 3px;
+        text-align: center;
+
+        &.short { width: 50px; }
+        &.standard { width: 100px; }
+        &.long { width: 250px; }
+        &.full-width { width: 100%; }
+	}
+
+    label.file-upload {
+        margin: $standard-margin 0;
+        background: $button-color;
+    }
+}
+
+.hidden-file-upload {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}

@@ -1,0 +1,17 @@
+.btn {
+    display: inline-block;
+    padding: $standard-margin;
+    background: $button-color;
+    border: none;
+    color: #fff;
+    border-radius: 3px;
+
+    &.short { width: 50px; }
+    &.standard { width: 100px; }
+    &.long { width: 250px; }
+    &.full-width { width: 100%; }
+}
+
+.btn-success { background: $success-color; }
+.btn-warn { background: $warning-color; }
+.btn-danger { background: $error-color; }

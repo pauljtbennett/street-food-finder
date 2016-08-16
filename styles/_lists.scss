@@ -1,0 +1,13 @@
+.loadable-list {
+    .loader {
+        display: none;
+        text-align: center;
+        padding: $standard-margin;
+        font-size: 2em;
+        color: #ccc;
+    }
+
+    &.loading .loader {
+        display: block;
+    }
+}

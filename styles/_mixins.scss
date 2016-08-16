@@ -1,0 +1,10 @@
+@mixin header-font {
+	font-family: $header-font;
+    font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+@mixin paragraph-font {
+	font-size: $paragraph-font-size;
+	line-height: $paragraph-line-height;
+}
