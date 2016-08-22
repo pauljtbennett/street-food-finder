@@ -1,11 +1,14 @@
 var React = require('react');
 var ReactRouter = require('react-router');
-var Tabs = require('./profile/Tabs');
 var SessionButton = require('./session/SessionButton');
+var UsuallyOpen = require('./profile/UsuallyOpen');
+var StarRating = require('./profile/StarRating');
+var Tabs = require('./profile/Tabs');
 
 var Profile = React.createClass({
   mixins: [ReactFireMixin],
-  vendorSessionRef: null,
+  imagesLoaded: 0,
+  flickityCarousel: null,
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
@@ -30,34 +33,29 @@ var Profile = React.createClass({
         var imagesRef = firebase.database().ref('vendors/' + vendorId + '/images');
         this.bindAsObject(vendorRef, 'vendor');
         this.bindAsArray(imagesRef, 'images');
-
-        // Watch for changes to the vendor session to 
-        // place vendor on map
-        this.vendorSessionRef = firebase.database().ref('vendor-sessions/' + vendorId);
-        this.vendorSessionRef.limitToLast(1).on('child_added', function(snapshot) {
-          var session = snapshot.val();
-          var position = { lat: session.lat, lng: session.lng };
-          var map = new google.maps.Map(document.getElementById('map'), {
-            center: position,
-            zoom: 15,
-            disableDefaultUI: true,
-            zoomControl: true
-          });
-
-          var marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            animation: google.maps.Animation.DROP
-          });
-        }.bind(this));
       }
     }.bind(this));
   },
   componentDidMount: function() {
-    
+    // Initialise the carousel here as it doesn't
+    // require any data at this point
+    this.flickityCarousel = new Flickity('.carousel', {
+      setGallerySize: false,
+      imageLoad: true,
+      wrapAround: true,
+      lazyLoad: true,
+      pageDots: false,
+    });
   },
-  componentWillUnmount: function() {
-    this.vendorSessionRef.off();
+  componentDidUpdate: function(prevProps, prevState) {
+    // At this point we can safely reload flickity to include
+    // any new images that may have loaded
+    if (this.flickityCarousel !== null && prevState.images.length > this.imagesLoaded) {
+      var allImages = document.getElementsByClassName('image-list-item');
+      var lastImage = allImages[allImages.length - 1];
+      this.flickityCarousel.append(lastImage);
+      this.imagesLoaded = prevState.images.length;
+    }
   },
   render: function() {
     return (
@@ -66,11 +64,15 @@ var Profile = React.createClass({
           <div className="inner-container">
             <SessionButton />
           </div> : null }
-        <ul className="image-list">
-          {this.state.images.map(function(image) {
-            return <li key={image['.key']} className="image-list-item"><img src={image.url} /></li>
-          })}
-          </ul>
+        <div className="image-list-container">
+          <div className="image-list carousel">
+            {this.state.images.map(function(image) { 
+              return <div key={image['.key']} className="image-list-item carousel-cell">
+                <img data-flickity-lazyload={image.url} />
+              </div>
+            })}
+            </div>
+        </div>    
         <div className="vendor-brand"><h2>{this.state.vendor.name}</h2></div>
         <div className="inner-container">
           <p>{this.state.vendor.description}</p>

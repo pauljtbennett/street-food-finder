@@ -1,4 +1,5 @@
 var React = require('react');
+var MapTab = require('./tabs/MapTab');
 var MenuTab = require('./tabs/MenuTab');
 var ReviewsTab = require('./tabs/ReviewsTab');
 
@@ -26,7 +27,7 @@ var Tabs = React.createClass({
             <MenuTab menuId={this.props.menuId} />
           </div>
           <div className="tab-container-item visible" id="tab-map">
-            <div id="map" className="map"></div>
+            <MapTab vendorId={this.props.vendorId} />
           </div>
           <div className="tab-container-item" id="tab-reviews">
             <ReviewsTab vendorId={this.props.vendorId} />
