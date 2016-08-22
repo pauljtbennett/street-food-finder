@@ -1,5 +1,6 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 
 module.exports = {
@@ -30,6 +31,12 @@ module.exports = {
       filename: 'index.html',
       inject: 'body'
     }),
-    new ExtractTextPlugin("style.css")
+    new ExtractTextPlugin("style.css"),
+    new CopyWebpackPlugin([
+      {
+        from: 'img',
+        to: 'img'
+      }
+    ]),
   ]
 };
