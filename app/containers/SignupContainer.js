@@ -41,7 +41,11 @@ var SignupContainer = React.createClass({
     });
 
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function(data) {
-      this.context.router.push('/customer/account');
+      firebase.database().ref('users/' + data.uid).set({
+        logins: 0
+      }).then(function() {
+        this.context.router.push('/customer/account');  
+      }.bind(this));      
     }.bind(this)).catch(function(error) {
       this.setState({
         errorCode: error.code,

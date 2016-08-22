@@ -46,18 +46,11 @@ var LoginContainer = React.createClass({
       errorMessage: ''
     });
 
-    firebase.auth().signInWithEmailAndPassword(email, password).then(function(data) {
-      // After login attempt to get user's vendor profile,
-      // if none exists treat them as a customer, otherwise
-      // redirect to vendor profile
-      var user = firebase.auth().currentUser;
-      firebase.database().ref('vendors/' + user.uid).once('value').then(function(snapshot) {
-        if (snapshot.val() === null) {
-          this.context.router.push('/customer/nearby');
-        } else {
-          this.context.router.push('/vendor/profile');
-        }
-      }.bind(this));
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+      firebase.database().ref('users/' + user.uid).update({
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      });
     }.bind(this)).catch(function(error) {
       this.setState({
         errorCode: error.code,
