@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
+var UsuallyOpen = require('../vendor/profile/UsuallyOpen');
+var StarRating = require('../vendor/profile/StarRating');
 var classnames = require('classnames');
 
 var Nearby = React.createClass({
@@ -18,16 +20,9 @@ var Nearby = React.createClass({
                 })}
               </div>
               <ul className="vendor-data">
-                <li>{vendor.name} | $$ | {vendor.distance}km</li>
-                <li>Usually open 11:00 - 15:00</li>
-                <li className="star-rating">
-                  <span className="rating">4.3</span>                
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star-half-o"></i>
-                </li>
+                <li>{vendor.name} - {vendor.distance}km</li>
+                <li><UsuallyOpen vendor={vendor} /></li>
+                <li><StarRating stars={vendor.avgRating} showNumber={true}/></li>
               </ul>
             </Link>
           </li>
