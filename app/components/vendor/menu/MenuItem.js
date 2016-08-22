@@ -8,7 +8,7 @@ var MenuItem = React.createClass({
       <li className="menu-list-item">
         <div className="left">
           <span className="item-name">{this.props.item.name}</span>
-          <span className="item-description">{this.props.item.description}</span>
+          <p className="item-description">{this.props.item.description}</p>
         </div>
         <div className="right">
           <span className="item-price">${parseFloat(this.props.item.price).toFixed(2)}</span>

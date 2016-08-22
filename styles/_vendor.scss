@@ -3,11 +3,11 @@
 }
 
 .vendor-list-item {
-    height: 60px;
+    height: $list-thumb-size;
 
     .vendor-image {
-        width: 60px;
-        height: 60px;
+        width: $list-thumb-size;
+        height: $list-thumb-size;
         float: left;
         margin-right: 10px;
         position: relative;
@@ -16,47 +16,54 @@
     }
 
     .vendor-image img {
-        height: 60px;
+        height: $list-thumb-size;
         width: auto;
     }
 
     .vendor-data {
-        height: 60px;
+        height: $list-thumb-size;
         padding: 8px 0;
-        font-size: 1.2em;
+        font-size: $paragraph-font-size;
         border-bottom: 1px solid $line-color;
 
         li {
-            margin-bottom: 3px;
-        }
-
-        .star-rating i {
-            color: #aaa;
+            margin-bottom: $small-margin;
         }
 
         .rating {
             display: inline-block;
-            margin-right: 5px;
+            margin-right: $small-margin;
         }
     }
 }
 
 .vendor-detail {
-    .image-list {
+    .image-list-container {
+        
+    }
 
+    .image-list {
+        height: 200px;
     }
 
     .image-list-item {
-        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        background: #000;
+
         img {
-            height: 200px;
+            display: block;
             width: auto;
-        }
+            height: 100%;
+            margin: 0 auto;
+        }        
     }
 
     .vendor-brand {
+        position: relative;
         margin-top: -25px;
         text-align: center;
+        z-index: 900;
 
         h2 {
             display: inline-block;
@@ -70,12 +77,13 @@
 
 .vendor-account {
     .image-list {
-
+        @include clearfix;
     }
 
     .image-list-item {
-        width: 50px;
+        float: left;
         height: 50px;
+        margin: 0 $small-margin $small-margin 0;
         overflow: hidden;
 
         img {
@@ -86,13 +94,17 @@
 }
 
 .menu-list {
-    margin-bottom: $standard-margin;
+    
 }
 
 .menu-list-item {
     padding: $standard-margin;
     font-size: $paragraph-font-size;
     border-bottom: 1px solid $line-color;
+
+    &:last-child {
+        border-bottom: none;
+    }
 
     @include clearfix;
 
@@ -107,10 +119,51 @@
     }
 
     .item-description {
-        color: #555;
+        color: $tertiary-color;
+        font-size: 1em;
     }
 
     .item-price, i {
         margin-left: $small-margin;
+    }
+}
+
+.review-list {
+    
+}
+
+.review-list-item {
+    padding: $standard-margin;
+    font-size: $paragraph-font-size;
+    border-bottom: 1px solid $line-color;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    @include clearfix;
+
+    .review-meta {
+        margin-bottom: $small-margin;
+
+        @include clearfix;
+    }
+
+    .review-author {
+        font-weight: bold;
+    }
+
+    .review-content {
+        color: $tertiary-color;
+        font-size: 1em;
+    }
+}
+
+.star-rating i {
+    margin-right: $star-margin;
+    color: $star-color;
+
+    &:last-child {
+        margin-right: 0;
     }
 }

@@ -51,6 +51,8 @@ form {
         cursor: pointer;
         border-radius: 3px;
         text-align: center;
+        font-size: 1.5em;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
 
         &.short { width: 50px; }
         &.standard { width: 100px; }
@@ -71,4 +73,21 @@ form {
 	overflow: hidden;
 	position: absolute;
 	z-index: -1;
+}
+
+.star-rating-group {
+    input {
+        display: none;
+    }
+
+    label {
+        float: left;
+        margin-right: 3px;
+    }
+
+    .group-label {
+        margin-right: $small-margin;
+    }
+
+    @include clearfix;
 }
