@@ -7,22 +7,23 @@ function Signup(props) {
     <div className="main-container">
       <nav className="navbar">
         <div className="navbar-header">
-          <h1 className="navbar-brand"><Link to='/'>Streetfood Finder</Link></h1>
+          <h1 className="navbar-brand"><Link to='/'>Street Food Finder</Link></h1>
         </div>
       </nav>
       <div className="inner-container signup-form">
         <form onSubmit={props.onSubmitUser}>
           <p>{props.errorMessage}</p>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" className="form-control" value={props.email} onChange={props.onUpdateEmail} />
+            <input type="email" name="email" id="email" className="form-control top" placeholder="Email" value={props.email} onChange={props.onUpdateEmail} />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" className="form-control" value={props.password} onChange={props.onUpdatePassword} />
+            <input type="password" name="password" id="password" className="form-control bottom" placeholder="Password" value={props.password} onChange={props.onUpdatePassword} />
           </div>
-          <button type="submit" className="btn btn-success">Sign Up</button>
+          <button type="submit" className="btn btn-success full-width">Sign Up</button>
         </form>
+      </div>
+      <div className="inner-container">
+        <p className="text-center">Already have an account? <Link to='/login'>Sign in</Link></p>
       </div>
     </div>
   )

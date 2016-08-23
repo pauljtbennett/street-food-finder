@@ -16,10 +16,12 @@
     }
 
     .navbar-header {
+        position: relative;
         width: 100%;
         height: $navbar-height;
         border-bottom: 1px solid $line-color;
         background: #fff;
+        z-index: 1002;
     }
 
     .navbar-brand {
@@ -33,7 +35,7 @@
         position: fixed;
         top: $navbar-height;
         bottom: 0;
-        width: 100%;
+        width: calc(100% - 40px);
         background: #fff;
         transform: translateX(-100%);
         z-index: 1001;
@@ -43,23 +45,67 @@
 
         &.open {
             transform: translateX(0);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
         }
     }
 
     .navbar-nav {
         font-size: $paragraph-font-size;
+        border-bottom: 1px solid $line-color;
 
         li {
             border-bottom: 1px solid $line-color;
+
+            &.profile-bar {
+                padding: 7px 12px;
+
+                @include clearfix;
+
+                img {
+                    float: left;
+                    width: 40px;
+                    height: 40px;
+                }
+
+                strong {
+                    display: inline-block;
+                    padding: 12px 0 0 12px;
+                }
+            }
         }
 
         li a {
-            display: inline-block;
-            padding: 10px 12px;
+            display: block;
+            padding: 15px 12px;
+
+            &.active {
+                background: $secondary-color;
+                color: #fff;
+            }
         }
 
         i {
             margin-right: 7px;
         }
     }
+}
+
+#app:after {
+    content: ' ';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0);
+    transform: translateX(-100%);
+
+    @include transition-property(background);
+	@include transition-duration(0.5s);
+}
+
+#app.open:after {
+    background: rgba(0, 0, 0, 0.5);
+    transform: translateX(0);
 }

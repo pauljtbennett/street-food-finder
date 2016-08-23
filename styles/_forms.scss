@@ -76,13 +76,16 @@ form {
 }
 
 .star-rating-group {
+    display: flex;
+    justify-content: center;
+
     input {
         display: none;
     }
 
     label {
-        float: left;
-        margin-right: 3px;
+        margin: $star-margin;
+        font-size: 2em;
     }
 
     .group-label {

@@ -38,6 +38,10 @@ p {
 	@include paragraph-font;
 	color: $primary-color;
 	margin-bottom: $small-margin;
+
+	&.text-center {
+		text-align: center;
+	}
 }
 
 pre, code {

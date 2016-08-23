@@ -8,6 +8,7 @@ var Account = React.createClass({
       name: '',
       email: '',
       picture: '',
+      providerId: '',
       uploading: false,
       uploadProgress: 0
     };
@@ -18,7 +19,8 @@ var Account = React.createClass({
         this.setState({
           name: user.displayName,
           email: user.email,
-          picture: user.photoURL
+          picture: user.photoURL,
+          providerId: user.providerData[0].providerId,
         });
       }
     }.bind(this));
@@ -104,32 +106,35 @@ var Account = React.createClass({
   render: function() {
     return (
       <div className="inner-container">
-        <form onSubmit={this.handleSubmitProfile}>
-          <div className="form-group">
-            <div className="profile-picture-uploader">
-              <label htmlFor="picture">
-                <img src={this.state.picture} className="profile-pic" />
-              </label>
-              <div className="overlay">
-                <span className="upload-progress">{this.state.uploading ? this.state.uploadProgress.toFixed(0) + '%' : ''}</span>
+        {this.state.providerId === 'password' ?
+          <form onSubmit={this.handleSubmitProfile}>
+            <div className="form-group">
+              <div className="profile-picture-uploader">
+                <label htmlFor="picture">
+                  <img src={this.state.picture} className="profile-pic" />
+                </label>
+                <div className="overlay">
+                  <span className="upload-progress">{this.state.uploading ? this.state.uploadProgress.toFixed(0) + '%' : ''}</span>
+                </div>
+                <input type="file" name="picture" id="picture" className="form-control hidden-file-upload" accept="image/*" onChange={this.onUpdatePicture} />
               </div>
-              <input type="file" name="picture" id="picture" className="form-control hidden-file-upload" accept="image/*" onChange={this.onUpdatePicture} />
             </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="fname">Your Name</label>
-            <input type="text" name="fname" id="fname" className="form-control" value={this.state.name} onChange={this.onUpdateName} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" className="form-control" value={this.state.email} onChange={this.onUpdateEmail} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Password</label>
-            <input type="password" name="password" id="password" className="form-control" onChange={this.onUpdatePassword} />
-          </div>
-          <button type="submit" className="btn btn-success">Save Profile</button>
-        </form>
+            <div className="form-group">
+              <label htmlFor="fname">Your Name</label>
+              <input type="text" name="fname" id="fname" className="form-control" value={this.state.name} onChange={this.onUpdateName} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input type="email" name="email" id="email" className="form-control" value={this.state.email} onChange={this.onUpdateEmail} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Password</label>
+              <input type="password" name="password" id="password" className="form-control" onChange={this.onUpdatePassword} />
+            </div>
+            <button type="submit" className="btn btn-success">Save Profile</button>
+          </form> :
+          <p>Your account information is managed by <strong>{this.state.providerId}</strong></p>
+        }
       </div>
     )
   }

@@ -58,12 +58,58 @@ var LoginContainer = React.createClass({
       });
     }.bind(this));
   },
+  handleFacebookLogin: function(e) {
+    e.preventDefault();
+    this.setState({
+      errorCode: '',
+      errorMessage: ''
+    });
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      var user = firebase.auth().currentUser;
+      user.updateEmail(result.user.providerData[0].email);
+      firebase.database().ref('users/' + user.uid).set({
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      });
+    }.bind(this)).catch(function(error) {
+      this.setState({
+        errorCode: error.code,
+        errorMessage: error.message
+      });
+    }.bind(this));
+  },
+  handleGoogleLogin: function(e) {
+    e.preventDefault();
+    this.setState({
+      errorCode: '',
+      errorMessage: ''
+    });
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      var user = firebase.auth().currentUser;
+      user.updateEmail(result.user.providerData[0].email);
+      firebase.database().ref('users/' + user.uid).set({
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      });
+    }.bind(this)).catch(function(error) {
+      this.setState({
+        errorCode: error.code,
+        errorMessage: error.message
+      });
+    }.bind(this));
+  },
   render: function() {
     return (
       <Login
         onUpdateEmail={this.handleUpdateEmail}
         onUpdatePassword={this.handleUpdatePassword}
         onSubmitUser={this.handleSubmitUser}
+        onFacebookLogin={this.handleFacebookLogin}
+        onGoogleLogin={this.handleGoogleLogin}
         email={this.state.email}
         password={this.state.password}
         errorCode={this.state.errorCode}
