@@ -53,7 +53,7 @@ var AddMenuItem = React.createClass({
           <div className="form-group">
             <input type="number" name="price" id="price" className="form-control bottom" placeholder="Price" required value={this.state.itemPrice} onChange={this.onUpdateItemPrice} />
           </div>
-          <button type="submit" className="btn full-width">Add item</button>
+          <button type="submit" className="btn full-width">Add Item</button>
         </form>
     )
   }

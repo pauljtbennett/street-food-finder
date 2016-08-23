@@ -18,7 +18,7 @@ var ReviewsTab = React.createClass({
     if (!this.refsBound && props.vendorId) {  
       this.refsBound = true;
       var vendorId = props.vendorId;
-      var reviewsRef = firebase.database().ref('vendor-reviews/' + vendorId);
+      var reviewsRef = firebase.database().ref('vendor-reviews/' + vendorId).orderByChild('timestamp');
       this.bindAsArray(reviewsRef, 'reviews');
 
       // Do a one-time check for empty results array,
@@ -107,7 +107,6 @@ var ReviewsTab = React.createClass({
           <h3 className="plain">Add Review</h3>
           <form onSubmit={this.handleSubmitReview}>
             <div className="form-group star-rating-group">
-              <label className="group-label">Score</label>
               {Array.apply(0, Array(5)).map(function(x, i) {
                 var score = i + 1
                 return <div key={i}>

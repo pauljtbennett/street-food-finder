@@ -7,6 +7,7 @@ var Account = React.createClass({
   mixins: [ReactFireMixin],
   getInitialState: function() {
     return {
+      isAlreadyVendor: false,
       name: '',
       strapline: '',
       description: '',
@@ -25,11 +26,16 @@ var Account = React.createClass({
         // the form don't need to be live
         vendorRef.once('value').then(function(snapshot) {
           var vendor = snapshot.val();
-          this.setState({
-            name: vendor.name,
-            strapline: vendor.strapline,
-            description: vendor.description,
-          })
+          if (vendor !== null) {
+            this.setState({
+              isAlreadyVendor: true,
+              name: vendor.name,
+              strapline: vendor.strapline,
+              description: vendor.description,
+            });
+          } else {
+            // Not a vendor yet
+          }
         }.bind(this));
       }
     }.bind(this));
@@ -63,9 +69,7 @@ var Account = React.createClass({
       <div className="inner-container vendor-account">
         <h2 className="plain">Vendor Account</h2>
         <p>Welcome to your vendor account, set up your profile here.</p>
-
         <hr />
-
         <form onSubmit={this.handleSubmitProfile}>
           <div className="form-group">
             <h3 className="plain">Images</h3>
@@ -90,7 +94,7 @@ var Account = React.createClass({
             <label htmlFor="description">Description</label>
             <textarea name="description" id="description" className="form-control" value={this.state.description} onChange={this.onUpdateDescription} />
           </div>
-          <button type="submit" className="btn btn-success full-width">Save</button>
+          <button type="submit" className="btn btn-success full-width">Save Vendor Profile</button>
         </form>
       </div>
     )
